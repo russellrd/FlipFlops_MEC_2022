@@ -1,4 +1,5 @@
 import xlrd
+import math
 import tkinter as tk
 from PIL import ImageTk, Image
 from tkinter import StringVar, ttk
@@ -32,10 +33,10 @@ gyro_angle_var.set(0)
 ttk.Label(frame, text="Ocean Current Detection (OCD)", font='Helvetica 18 bold').grid(columnspan=5)
 ttk.Label(frame, text="Accelerometer", font='Helvetica 14 bold').grid(column=0, row=1, padx=10, pady=10)
 accOn = tk.Label(frame, image=red)
-accOn.grid(column=1, row=1, padx=10, pady=10)
+accOn.grid(column=1, row=1, pady=10)
 ttk.Label(frame, text="Gyroscope", font='Helvetica 14 bold').grid(column=3, row=1, padx=10, pady=10)
 gyroOn = tk.Label(frame, image=red)
-gyroOn.grid(column=4, row=1, padx=10, pady=10)
+gyroOn.grid(column=4, row=1, pady=10)
 ttk.Label(frame, text="Status: ", font='Helvetica 12 bold').grid(column=0, row=2, padx=10, pady=10)
 ttk.Label(frame, textvariable=acc_status_var, font='Helvetica 12').grid(column=1, row=2, padx=10, pady=10)
 ttk.Label(frame, text="Velocity: ", font='Helvetica 12 bold').grid(column=0, row=3, padx=10, pady=10)
@@ -45,9 +46,18 @@ ttk.Label(frame, textvariable=acc_acceleration_var, font='Helvetica 12').grid(co
 
 ttk.Label(frame, text="Status: ", font='Helvetica 12 bold').grid(column=3, row=2, padx=10, pady=10)
 ttk.Label(frame, textvariable=gyro_status_var, font='Helvetica 12').grid(column=4, row=2, padx=10, pady=10)
-ttk.Label(frame, text="Velocity: ", font='Helvetica 12 bold').grid(column=3, row=3, padx=10, pady=10)
+ttk.Label(frame, text="Angle: ", font='Helvetica 12 bold').grid(column=3, row=3, padx=10, pady=10)
 ttk.Label(frame, textvariable=gyro_angle_var, font='Helvetica 12').grid(column=4, row=3, padx=10, pady=10)
 
+MAX_STEPS = 100
+MAX_ANGLE = 10
+CANVAS_WIDTH = 350
+CANVAS_HEIGHT = 350
+CANVAS_RADIUS = 50
+ARROW_SIZE = 200
+
+canvas = tk.Canvas(frame, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, bg = 'grey')
+canvas.grid(column=0, row=5, padx=10, pady=10, columnspan=5)
 data_workbook = xlrd.open_workbook('MEC_EXCEL.xls').sheet_by_index(0)
 
 data = []
@@ -55,24 +65,20 @@ data = []
 for i in range(1, data_workbook.nrows):
     data.append(DataEntry(data_workbook.row_values(i,0)[0], data_workbook.row_values(i,0)[1], data_workbook.row_values(i,0)[2]))
 
+
 acc_logger = Log("accelerometer.log")
 gyro_logger = Log("gyroscope.log")
 
 accelerometer = Accelerometer("flip", acc_logger)
-gyroscope = Gyroscope("flop", gyro_logger)
+gyroscope = Gyroscope("flop", gyro_logger, {"MAX_ANGLE": MAX_ANGLE})
 
 accelerometer.turn_on()
 gyroscope.turn_on()
-
-MAX_STEPS = 100
-MAX_ANGLE = 10
 
 step = 0
 
 def update():
     global step
-    global accOn
-    global gyroOn
 
     step_data = data[step]
 
@@ -99,10 +105,14 @@ def update():
     # Update the labels
     acc_status_var.set(accData["status"].name)
     acc_velocity_var.set(accData["velocity"])
-    acc_acceleration_var.set(accData["acceleration"])
+    acc_acceleration_var.set(str(round(accData["acceleration"], 2)))
 
     gyro_status_var.set(gyroData["status"].name)
     gyro_angle_var.set(gyroData["angle"])
+
+    canvas.delete("all")
+    canvas.create_oval((CANVAS_WIDTH/2)-CANVAS_RADIUS, (CANVAS_HEIGHT/2)-CANVAS_RADIUS, (CANVAS_WIDTH/2)+CANVAS_RADIUS, (CANVAS_HEIGHT/2)+CANVAS_RADIUS, fill="black", width=2)
+    canvas.create_line((CANVAS_WIDTH/2), (CANVAS_HEIGHT/2), (CANVAS_WIDTH/2)+(ARROW_SIZE*math.cos(math.radians(gyroData["angle"]-90))), (CANVAS_HEIGHT/2)+(ARROW_SIZE*math.sin(math.radians(gyroData["angle"]-90))), arrow=tk.LAST, width=5, fill="red")
 
     # Update the GUI
     step+=1

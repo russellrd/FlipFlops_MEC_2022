@@ -41,11 +41,11 @@ class Accelerometer:
 
     def set_velocity (self, velocity):
         self.logger.log("A-V", self.velocity)
-        self.velocity
+        self.velocity = velocity
 
     def set_accelration (self, acceler):
         self.logger.log("A-A", self.acceler)
-        self.acceler
+        self.acceler, acceler
 
     def set_prev (self, prev):
         self.prev
@@ -80,7 +80,7 @@ class Accelerometer:
         
     def calc_accelr (self):
         if (self.prev != None):
-            self.acceler = self.velocity / (self.time - self.prev)
+            self.acceler = (self.velocity-self.prev) / 0.1
         self.prev = self.velocity
 
     def update(self, data):

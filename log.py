@@ -13,5 +13,5 @@ class Log():
 		self.fh.close()
 
 	def log(self, level, data):
-		info = "[" + self.levelDict[level] + "]" + " " + data + "\n"
+		info = "[" + self.levelDict[level] + "]" + " " + str(data) + "\n"
 		self.fh.write(info)
