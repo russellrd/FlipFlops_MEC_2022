@@ -14,15 +14,15 @@ class Accelerometer:
         self.logger = logger
 
     def set_x(self, AccX):
-        self.logger.log("A-X", AccX);
+        self.logger.log("A-X", AccX)
         self.AccX
 
     def set_y (self, AccY):
-        self.logger.log("A-Y", AccY);
+        self.logger.log("A-Y", AccY)
         self.AccY
 
     def set_speed (self, speed): 
-        self.logger.log("A-S", speed);
+        self.logger.log("A-S", speed)
         self.speed
 
     def set_time (self, time): 
@@ -32,18 +32,18 @@ class Accelerometer:
         self.magn
 
     def set_velocity (self, velocity):
-        self.logger.log("A-V", velocity);
+        self.logger.log("A-V", velocity)
         self.velocity
 
     def get_x (self):
-        return AccX
+        return self.AccX
     
     def get_y (self):
-        return AccY
+        return self.AccY
     
     def get_speed(self):
         self.calc_mag()
-        return speed
+        return self.speed
     
     def get_time(self): 
         return self.time
