@@ -20,6 +20,7 @@ class Accelerometer:
         self.logger = logger
         self.status = Status.Idle
         self.config = config
+        self.logger.log("P", "Accelerometer init")
 
     def set_x(self, AccX):
         self.logger.log("A-X", self.AccX)
@@ -87,13 +88,18 @@ class Accelerometer:
         self.set_velocity(data.get_curr_vel ())
         self.calc_mag ()
         self.calc_accelr ()
+        self.logger.log("A-M", self.magn)
+        self.logger.log("A-A", self.acceler)
+        self.logger.log("A-V", self.velocity)
         return {"power" : self.power, "status" : self.status, "velocity" : self.velocity, "acceleration" : self.acceler}
 
     def turn_on(self):
+        self.logger.log("P", "Accelerometer ON")
         self.status = Status.Running
         self.power = True
 
     def turn_off(self):
+        self.logger.log("P", "Accelerometer OFF")
         self.status = Status.Idle
         self.power = False
 
