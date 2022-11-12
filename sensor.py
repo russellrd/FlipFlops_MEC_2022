@@ -25,8 +25,8 @@ class Gyroscope :
     def turn_off(self):
     	self.power = 0
 
-  	def update(self):
-  		return [self.power, self.status, self.angle]
+  	def get_update(self):
+  		return {"power" : self.power, "status:" : self.status, "angle" : self.angle}
 
     def __str__(self):
     	return "Name: " + self.name + " Angle: " + self.angle
