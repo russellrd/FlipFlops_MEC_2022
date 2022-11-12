@@ -51,9 +51,9 @@ accOn = tk.Label(frame, image=red)
 accOn.grid(column=1, row=1, pady=10)
 ttk.Label(frame, text="Status: ", font='Helvetica 12 bold').grid(column=0, row=2, padx=10, pady=10)
 ttk.Label(frame, textvariable=acc_status_var, font='Helvetica 12').grid(column=1, row=2, padx=10, pady=10)
-ttk.Label(frame, text="Velocity: ", font='Helvetica 12 bold').grid(column=0, row=3, padx=10, pady=10)
+ttk.Label(frame, text="Velocity (cm/s): ", font='Helvetica 12 bold').grid(column=0, row=3, padx=10, pady=10)
 ttk.Label(frame, textvariable=acc_velocity_var, font='Helvetica 12').grid(column=1, row=3, padx=10, pady=10)
-ttk.Label(frame, text="Acceleration: ", font='Helvetica 12 bold').grid(column=0, row=4, padx=10, pady=10)
+ttk.Label(frame, text="Acceleration (cm/s^2): ", font='Helvetica 12 bold').grid(column=0, row=4, padx=10, pady=10)
 ttk.Label(frame, textvariable=acc_acceleration_var, font='Helvetica 12').grid(column=1, row=4, padx=10, pady=10)
 
 # Lables for gyroscope
