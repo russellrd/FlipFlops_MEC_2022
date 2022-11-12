@@ -7,11 +7,12 @@ class Accelerometer:
     time = 0 
     magn = 0
     velocity = 0 
+    power = False
 
     def __init__(self, name, logger):
         self.name = name
         self.logger = logger
-	
+
     def set_x(self, AccX):
         self.logger.log("A-X", AccX);
         self.AccX
@@ -62,7 +63,13 @@ class Accelerometer:
         self.velocity = self.speed / self.time
 
     def update(self, data):
-        pass
+        return {"power" : self.power, "velocity" : self.velocity}
+
+    def turn_on(self):
+        self.power = True
+
+    def turn_off(self):
+        self.power = False
 
     def __str__(self):
         return "Name: " + self.name + " Speed: " + self.speed

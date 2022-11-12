@@ -1,8 +1,9 @@
 class Gyroscope :
+	prev_angle = 0
 	angle = 0
 	name = ""
 	status = 1
-	power = 1
+	power = False
 
 	def __init__(self, name,logger):
 		self.name = name
@@ -19,12 +20,13 @@ class Gyroscope :
 		return self.status
 
 	def turn_on(self):
-		self.power = 1
+		self.power = True
 
 	def turn_off(self):
-		self.power = 0
+		self.power = False
 
 	def update(self, data):
+		prev_angle = self.angle
 		return {"power" : self.power, "status:" : self.status, "angle" : self.angle}
 
 	def __str__(self):
