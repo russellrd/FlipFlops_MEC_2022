@@ -91,7 +91,8 @@ class Accelerometer:
         if (self.prev != None):
             self.acceler = (self.velocity-self.prev) / 0.1
         self.prev = self.velocity
-
+        
+     # This function will update the values 
     def update(self, data):
         self.set_velocity(data.get_curr_vel ())
         self.calc_mag ()
@@ -105,7 +106,7 @@ class Accelerometer:
         self.logger.log("P", "Accelerometer ON")
         self.status = Status.Running
         self.power = True
-     # This function will turn on the sensor 
+     # This function will turn off the sensor 
     def turn_off(self):
         self.logger.log("P", "Accelerometer OFF")
         self.status = Status.Idle
