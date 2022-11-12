@@ -70,7 +70,7 @@ class Accelerometer:
      
     def calc_mag(self):
 
-        self.speed = (self.AccX ** 2 + self.AccY** 2)
+        self.speed = math.sqrt(self.AccX ** 2 + self.AccY** 2)
         # calc the magnitude using the speed of x and y 
 
     def calc_velocity (self):
@@ -80,7 +80,6 @@ class Accelerometer:
     def calc_accelr (self):
         self.calc_velocity ()
         self.acceler = self.velocity / self.time
-
 
     def update(self, data):
         return {"power" : self.power, "status" : self.status, "velocity" : self.velocity, "acceleration" : self.acceler}
