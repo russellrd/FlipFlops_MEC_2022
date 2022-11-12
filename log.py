@@ -1,4 +1,4 @@
-class log():
+class Log():
 	file_name = ""
 	fh = None
 	levelDict = {"P": "Power", "E": "Error", "GA": "Angle"}
