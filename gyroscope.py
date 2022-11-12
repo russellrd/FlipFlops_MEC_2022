@@ -1,4 +1,5 @@
 from status import Status
+import math
 
 class Gyroscope :
 	prev_angle = 0
@@ -35,6 +36,12 @@ class Gyroscope :
 
 	def update(self, data):
 		prev_angle = self.angle
+	
+		if (abs(prev_angle - data.get_dir()) > config["MAX_ANGLE"]):
+			self.status = Status.Error
+		else:
+			self.angle = data.get_dir();
+
 		return {"power" : self.power, "status" : self.status, "angle" : self.angle}
 
 	def __str__(self):
