@@ -1,13 +1,20 @@
+import status
+
 class Gyroscope :
 	prev_angle = 0
 	angle = 0
 	name = ""
-	status = 1
+	state = None
 	power = False
 
-	def __init__(self, name,logger):
+	config = None
+
+	def __init__(self, name,logger, config):
 		self.name = name
 		self.logger = logger
+		self.config = config
+		self.status = Status()
+		self.state = self.status.Idle.name
 
 	def set_angle(self, angle):
 		# self.logger.log("GA", angle)
@@ -20,9 +27,11 @@ class Gyroscope :
 		return self.status
 
 	def turn_on(self):
+		self.state = self.status.Running.name
 		self.power = True
 
 	def turn_off(self):
+		self.status = self.status.Idle.name
 		self.power = False
 
 	def update(self, data):
