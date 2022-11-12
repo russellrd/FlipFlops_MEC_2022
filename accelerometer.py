@@ -1,24 +1,47 @@
-AccX, AccY, AccZ
-GyroX, GyroY, GyroZ
-accAngleX, accAngleY, gyroAngleX, gyroAngleY, gyroAngleZ
-elapsedTime, currentTime, previousTime
+import math
 
-class Gyroscope :
-    pass
+
 
 class Accelerometer: 
-	speed = 0
-	name = ""
- 
+    AccX= 0 
+    AccY = 0
+    speed  = 0
+    time = 0 
+    magn = 0
+    velocity = 0 
+
     def __init__(self, name):
-    	self.name = 0
+        self.name = 0
+	
+    def set_x(self, AccX):
+        pass
 
-    def set_angle(self, angle):
-    	pass
+    def set_y (self, AccY):
+        pass
 
-    def get_angle(self):
-    	return speed
+    def set_speed (self, speed): 
+        pass
+
+    def set_time (self, time): 
+        pass
+
+    def set_magn (self,magn): 
+        pass
+
+    def set_velocity (self, velocity):
+        pass
+
+    
+
+    def get_speed(self):
+        return speed
 
     def __str__(self):
-    	return "Name: " + self.name + " Speed: " + self.speed
+        return "Name: " + self.name + " Speed: " + self.speed
 
+    def check_Y():
+        pass
+    #def calc_mag ():
+       
+    # calc the magnitude using the speed of x and y 		
+    #def calc_velocity ():
