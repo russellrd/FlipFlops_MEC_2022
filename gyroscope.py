@@ -37,7 +37,7 @@ class Gyroscope :
 	def update(self, data):
 		self.prev_angle = self.angle
 	
-		if (abs(prev_angle - data.get_dir()) > self.config["MAX_ANGLE"]):
+		if (abs(self.prev_angle - data.get_dir()) > self.config["MAX_ANGLE"]):
 			self.status = Status.Error
 		else:
 			self.angle = data.get_dir();
