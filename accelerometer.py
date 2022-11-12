@@ -1,5 +1,5 @@
 import math
-from status import Status
+import status
 
 class Accelerometer: 
     AccX= 0 
@@ -10,25 +10,27 @@ class Accelerometer:
     velocity = 0 
     power = False
     state = None
+    acceler = 0
 
     config = None
 
-    def __init__(self, name, logger, config = {}):
+    def __init__(self, name, logger, config):
         self.name = name
         self.logger = logger
-        self.state = Status.Idle
+        self.status = Status()
+        self.state = self.status.Idle.name
         self.config = config
 
     def set_x(self, AccX):
-        self.logger.log("A-X", AccX)
+        self.logger.log("A-X", self.AccX)
         self.AccX
 
     def set_y (self, AccY):
-        self.logger.log("A-Y", AccY)
+        self.logger.log("A-Y", self.AccY)
         self.AccY
 
     def set_speed (self, speed): 
-        self.logger.log("A-S", speed)
+        self.logger.log("A-S", self.speed)
         self.speed
 
     def set_time (self, time): 
@@ -38,8 +40,13 @@ class Accelerometer:
         self.magn
 
     def set_velocity (self, velocity):
-        self.logger.log("A-V", velocity)
+        self.logger.log("A-V", self.velocity)
         self.velocity
+
+    def set_accelration (self, acceler):
+        self.logger.log("A-A", self.acceler)
+        self.acceler
+    
 
     def get_x (self):
         return self.AccX
@@ -60,23 +67,32 @@ class Accelerometer:
     def get_velocity(self):
         return self.velocity 
     
+    def get_accelration(self):
+        return self.acceler
+     
     def calc_mag(self):
 
-        self.speed = math. sqrt(self.AccX ** 2 + self.AccY** 2)
+        self.speed = (self.AccX ** 2 + self.AccY** 2)
         # calc the magnitude using the speed of x and y 
+
     def calc_velocity (self):
         self.calc_mag ()
         self.velocity = self.speed / self.time
 
+    def calc_accelr (self):
+        self.calc_velocity ()
+        self.acceler = self.velocity / self.time
+
+
     def update(self, data):
-        return {"power" : self.power, "status" : self.state, "velocity" : self.velocity}
+        return {"Power" : self.power, "Status" : self.state, "Velocity" : self.velocity, "Accelration" : self.acceler}
 
     def turn_on(self):
-        self.state = Status.Running
-        self.power = True
+        self.state = self.status.Running.name
+        self.power = T
 
     def turn_off(self):
-        self.state = Status.Idle
+        self.state = self.status.Idle.name
         self.power = False
 
     def __str__(self):
