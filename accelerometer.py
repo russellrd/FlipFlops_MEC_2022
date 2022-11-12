@@ -14,22 +14,22 @@ class Accelerometer:
         self.name = 0
 	
     def set_x(self, AccX):
-        pass
+        self.AccX
 
     def set_y (self, AccY):
-        pass
+        self.AccY
 
     def set_speed (self, speed): 
-        pass
+        self.speed
 
     def set_time (self, time): 
-        pass
+        self.time
 
     def set_magn (self,magn): 
-        pass
+        self.magn
 
     def set_velocity (self, velocity):
-        pass
+        self.velocity
 
     def get_x (self):
         return AccX
@@ -38,6 +38,7 @@ class Accelerometer:
         return AccY
     
     def get_speed(self):
+        self.calc_mag()
         return speed
     
     def get_time(self): 
@@ -49,12 +50,14 @@ class Accelerometer:
     def get_velocity(self):
         return velocity 
     
+    def calc_mag(self):
+
+        self.speed = math. sqrt(self.AccX ** 2 + self.AccY** 2)
+        # calc the magnitude using the speed of x and y 
+    def calc_velocity (self):
+        self.calc_mag ()
+        self.velocity = self.speed / self.time
+
     def __str__(self):
         return "Name: " + self.name + " Speed: " + self.speed
-
-    def check_Y():
-        pass
-    #def calc_mag ():
-       
-    # calc the magnitude using the speed of x and y 		
-    #def calc_velocity ():
+    
