@@ -1,5 +1,5 @@
 import math
-import status
+from status import Status
 
 class Accelerometer: 
     AccX= 0 
@@ -13,11 +13,10 @@ class Accelerometer:
 
     config = None
 
-    def __init__(self, name, logger, config):
+    def __init__(self, name, logger, config = {}):
         self.name = name
         self.logger = logger
-        self.status = Status()
-        self.state = self.status.Idle.name
+        self.state = Status.Idle
         self.config = config
 
     def set_x(self, AccX):
@@ -70,14 +69,14 @@ class Accelerometer:
         self.velocity = self.speed / self.time
 
     def update(self, data):
-        return {"power" : self.power, "Status" : self.state, "velocity" : self.velocity}
+        return {"power" : self.power, "status" : self.state, "velocity" : self.velocity}
 
     def turn_on(self):
-        self.state = self.status.Running.name
+        self.state = Status.Running
         self.power = True
 
     def turn_off(self):
-        self.state = self.status.Idle.name
+        self.state = Status.Idle
         self.power = False
 
     def __str__(self):
