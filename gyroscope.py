@@ -3,7 +3,8 @@ class Gyroscope :
 	name = ""
 	status = 1
 	power = 1
- 	def __init__(self, name,logger):
+
+	def __init__(self, name,logger):
 		self.name = 0
 		self.logger = logger
 
