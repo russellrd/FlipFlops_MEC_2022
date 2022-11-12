@@ -4,7 +4,7 @@ from status import Status
 # This class will be used to represent the accelerometer. The data is taken from the excel sheet with the simulated data and gives the acceleration and velocity.  
 
 class Accelerometer: 
-    # initializing variables
+    # Initializing variables
     AccX= 0 
     AccY = 0
     speed  = 0
@@ -24,9 +24,9 @@ class Accelerometer:
         self.logger = logger
         self.status = Status.Idle
         self.config = config
-        self.logger.log("P", "Accelerometer init")
+        self.logger.log("P", "Accelerometer Init")
         
-     # Setters 
+    # Setters 
     def set_x(self, AccX):
         self.logger.log("A-X", self.AccX)
         self.AccX
@@ -82,10 +82,11 @@ class Accelerometer:
     def get_prev (self):
         return self.prev
     
-     # Function to find the speed 
+    # Function to find the speed 
     def calc_mag(self):
         self.speed = math.sqrt(self.AccX ** 2 + self.AccY** 2)
-     # Function to calcaulte acceleration    
+
+    # Function to calcaulte acceleration    
     def calc_accelr (self):
         # chehcking if previous time is not equal to None 
         if (self.prev != None):
@@ -100,11 +101,13 @@ class Accelerometer:
         self.logger.log("A-A", self.acceler)
         self.logger.log("A-V", self.velocity)
         return {"power" : self.power, "status" : self.status, "velocity" : self.velocity, "acceleration" : self.acceler}
+
     # This function will turn on the sensor 
     def turn_on(self):
         self.logger.log("P", "Accelerometer ON")
         self.status = Status.Running
         self.power = True
+
      # This function will turn on the sensor 
     def turn_off(self):
         self.logger.log("P", "Accelerometer OFF")

@@ -2,7 +2,7 @@ class Log():
 	file_name = ""
 	fh = None
 	levelDict = {"P": "Power", "E": "Error", "GA": "Angle", "A-X": "X-Speed", 
-	"A-Y":"Y-Speed", "A-M" :" Mag", 
+	"A-Y":"Y-Speed", "A-M" :"Mag", 
 	"A-V" : "Velocity", "A-A": "Acceleration", "W": "Warning"}
 
 	def __init__(self, file_name):
