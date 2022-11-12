@@ -65,6 +65,7 @@ accelerometer.turn_on()
 gyroscope.turn_on()
 
 MAX_STEPS = 100
+MAX_ANGLE = 10
 
 step = 0
 
@@ -98,7 +99,7 @@ def update():
     # Update the labels
     acc_status_var.set(accData["status"].name)
     acc_velocity_var.set(accData["velocity"])
-    acc_acceleration_var.set(step_data.get_curr_vel())
+    acc_acceleration_var.set(accData["acceleration"])
 
     gyro_status_var.set(gyroData["status"].name)
     gyro_angle_var.set(gyroData["angle"])
