@@ -46,13 +46,13 @@ class Accelerometer:
         return speed
     
     def get_time(self): 
-        return time
+        return self.time
     
     def get_magn(self): 
-        return magn
+        return self.magn
     
     def get_velocity(self):
-        return velocity 
+        return self.velocity 
     
     def calc_mag(self):
 
