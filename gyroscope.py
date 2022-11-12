@@ -40,7 +40,10 @@ class Gyroscope :
 		if (abs(self.prev_angle - data.get_dir()) > self.config["MAX_ANGLE"]):
 			self.status = Status.Error
 		else:
-			self.angle = data.get_dir();
+			if (self.power):
+				self.angle = data.get_dir();
+			else:
+				self.logger.log("W", "Gyro is off")
 
 		return {"power" : self.power, "status" : self.status, "angle" : self.angle}
 
