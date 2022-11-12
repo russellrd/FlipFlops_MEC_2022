@@ -5,7 +5,7 @@ class Gyroscope :
 	power = 1
 
 	def __init__(self, name,logger):
-		self.name = 0
+		self.name = name
 		self.logger = logger
 
 	def set_angle(self, angle):

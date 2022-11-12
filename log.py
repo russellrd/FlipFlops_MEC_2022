@@ -1,7 +1,8 @@
 class Log():
 	file_name = ""
 	fh = None
-	levelDict = {"P": "Power", "E": "Error", "GA": "Angle"}
+	levelDict = {"P": "Power", "E": "Error", "GA": "Angle", 
+	"A-X": "X-Speed", "A-Y":"Y-Speed", "A-M" :" Mag", "A-V" : "Velocity"}
 
 	def __init__(self, file_name):
 		self.file_name = file_name
