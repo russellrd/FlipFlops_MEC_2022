@@ -9,14 +9,14 @@ class Gyroscope :
 		self.logger = logger
 
 	def set_angle(self, angle):
-		logger.log("GA", angle)
+		self.logger.log("GA", angle)
 		self.angle = angle
 
 	def get_angle(self):
-		return angle
+		return self.angle
 
 	def get_status(self):
-		return status
+		return self.status
 
 	def turn_on(self):
 		self.power = 1
