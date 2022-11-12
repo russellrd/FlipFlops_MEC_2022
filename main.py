@@ -51,13 +51,13 @@ ttk.Label(frame, textvariable=gyro_angle_var, font='Helvetica 12').grid(column=4
 
 MAX_STEPS = 100
 MAX_ANGLE = 10
-CANVAS_WIDTH = 350
-CANVAS_HEIGHT = 350
-CANVAS_RADIUS = 50
-ARROW_SIZE = 200
+CANVAS_WIDTH = 200
+CANVAS_HEIGHT = 200
+CANVAS_RADIUS = 40
+ARROW_SIZE = 80
 
-canvas = tk.Canvas(frame, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, bg = 'grey')
-canvas.grid(column=0, row=5, padx=10, pady=10, columnspan=5)
+canvas = tk.Canvas(frame, width=CANVAS_WIDTH, height=CANVAS_HEIGHT, bg = 'lightblue')
+canvas.grid(column=5, row=0, padx=10, pady=10, columnspan=5, rowspan=5)
 data_workbook = xlrd.open_workbook('MEC_EXCEL.xls').sheet_by_index(0)
 
 data = []
@@ -108,12 +108,13 @@ def update():
     acc_acceleration_var.set(str(round(accData["acceleration"], 2)))
 
     gyro_status_var.set(gyroData["status"].name)
-    gyro_angle_var.set(gyroData["angle"])
+    gyro_angle_var.set(str(gyroData["angle"])+"°")
 
     canvas.delete("all")
+    canvas.create_line((CANVAS_WIDTH/2), (CANVAS_HEIGHT/2), (CANVAS_WIDTH/2)+(ARROW_SIZE*math.cos(math.radians(gyroData["angle"]-90))), (CANVAS_HEIGHT/2)+(ARROW_SIZE*math.sin(math.radians(gyroData["angle"]-90))), arrow=tk.LAST, width=8, fill="red", arrowshape=(25, 25, 8))
     canvas.create_oval((CANVAS_WIDTH/2)-CANVAS_RADIUS, (CANVAS_HEIGHT/2)-CANVAS_RADIUS, (CANVAS_WIDTH/2)+CANVAS_RADIUS, (CANVAS_HEIGHT/2)+CANVAS_RADIUS, fill="black", width=2)
-    canvas.create_line((CANVAS_WIDTH/2), (CANVAS_HEIGHT/2), (CANVAS_WIDTH/2)+(ARROW_SIZE*math.cos(math.radians(gyroData["angle"]-90))), (CANVAS_HEIGHT/2)+(ARROW_SIZE*math.sin(math.radians(gyroData["angle"]-90))), arrow=tk.LAST, width=5, fill="red")
-
+    canvas.create_text((CANVAS_WIDTH/2), (CANVAS_HEIGHT/2), text="OCD", font='Helvetica 14 bold', fill="white")
+    
     # Update the GUI
     step+=1
     if(step < MAX_STEPS):
