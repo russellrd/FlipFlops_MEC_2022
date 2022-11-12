@@ -10,10 +10,12 @@ class Accelerometer:
     magn = 0
     velocity = 0 
 
-    def __init__(self, name):
-        self.name = 0
+    def __init__(self, name, logger):
+        self.name = name
+        self.logger = logger
 	
     def set_x(self, AccX):
+        #self.logger.log("AS")
         self.AccX
 
     def set_y (self, AccY):
