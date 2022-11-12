@@ -1,15 +1,16 @@
-class loggine():
+class log():
 	file_name = ""
 	fh = None
 	levelDict = {"P": "Power", "E": "Error", "GA": "Angle"}
+
 	def __init__(self, file_name):
 		self.file_name = file_name
-		self.fh = open(selg.file_name, "w")
+		self.fh = open(self.file_name, "w")
 
 	def closeFile(self):
-		fh.close()
+		self.fh.close()
 
 	def log(self, level, data):
-		info = levelDict[level] + " " + data
-		f.write(logger)
+		info = self.levelDict[level] + " " + data + "\n"
+		self.fh.write(info)
 

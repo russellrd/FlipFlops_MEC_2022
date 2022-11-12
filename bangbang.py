@@ -19,9 +19,9 @@ class BangBangLoop:
 		self.error = new_error
 
 	def loop(self):
-		if (setpoint < curr):
-			curr += 0.1
+		if (self.setpoint < self.curr):
+			self.curr += 0.1
 		else:
-			curr -= 0.1
+			self.curr -= 0.1
 
 
