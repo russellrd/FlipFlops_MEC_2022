@@ -1,8 +1,11 @@
+import xlrd
 import tkinter as tk
 from PIL import ImageTk, Image
 from tkinter import StringVar, ttk
 from accelerometer import Accelerometer
 from gyroscope import Gyroscope
+from log import Log
+from data_entry import DataEntry
 
 root = tk.Tk()
 root.title("Ocean Current Detection (OCD)")
@@ -28,10 +31,25 @@ ttk.Label(frame, textvariable=acc_velocity_var, font='Helvetica 12').grid(column
 ttk.Label(frame, text="Acceleration: ", font='Helvetica 12 bold').grid(column=0, row=3, padx=10, pady=10)
 ttk.Label(frame, textvariable=acc_acceleration_var, font='Helvetica 12').grid(column=1, row=3, padx=10, pady=10)
 
+data_workbook = xlrd.open_workbook('MEC_EXCEL.xls').sheet_by_index(0)
+
+data = []
+
+for i in range(1, data_workbook.nrows):
+    data.append(DataEntry(data_workbook.row_values(i,0), data_workbook.row_values(i,1), data_workbook.row_values(i,2)))
+
+print(data[0])
+
+acc_logger = Log("accelerometer.log")
+gyro_logger = Log("gyroscope.log")
+
+accelerometer = Accelerometer("flip", acc_logger)
+gyroscope = Gyroscope("flop", gyro_logger)
+
 def update():
     # Update the sensor data
-    accData = Accelerometer.update()
-    gyroData = Gyroscope.update()
+    accData = accelerometer.update()
+    gyroData = gyroscope.update()
 
     # Update accelerometer "on" icon
     if(accData["on"] == True):
@@ -50,7 +68,8 @@ def update():
         gyro.image = red
 
     # Update the labels
-    ttk.Label(frame, text="")
+    acc_velocity_var.set(accData["velocity"])
+    acc_acceleration_var.set(accData["acceleration"])
 
     # Update the GUI
     root.after(100, update)
