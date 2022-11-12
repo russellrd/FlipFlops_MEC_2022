@@ -27,10 +27,12 @@ class Gyroscope :
 		return self.status
 
 	def turn_on(self):
+		self.logger.log("P", "Gyro ON")
 		self.status = Status.Running
 		self.power = True
 
 	def turn_off(self):
+		self.logger.log("P", "Gyro OFF")
 		self.status = Status.Idle
 		self.power = False
 
@@ -42,6 +44,7 @@ class Gyroscope :
 		else:
 			if (self.power):
 				self.angle = data.get_dir();
+				self.logger.log("GA", self.angle)
 			else:
 				self.logger.log("W", "Gyro is off")
 
