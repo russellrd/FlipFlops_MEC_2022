@@ -42,6 +42,7 @@ class Gyroscope :
 		if (abs(self.prev_angle - data.get_dir()) > self.config["MAX_ANGLE"]):
 			self.status = Status.Error
 			self.turn_off()
+			self.status = Status.Error
 		else:
 			if (self.power):
 				self.angle = data.get_dir();
