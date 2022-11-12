@@ -6,6 +6,7 @@ class Accelerometer:
     AccY = 0
     speed  = 0
     time = 0 
+    prev = None
     magn = 0
     velocity = 0 
     power = False
@@ -45,7 +46,10 @@ class Accelerometer:
     def set_accelration (self, acceler):
         self.logger.log("A-A", self.acceler)
         self.acceler
-    
+
+    def set_prev (self, prev):
+        self.prev
+
     def get_x (self):
         return self.AccX
 
@@ -67,21 +71,20 @@ class Accelerometer:
     
     def get_acceleration(self):
         return self.acceler
+    
+    def get_prev (self):
+        return self.prev
      
     def calc_mag(self):
         self.speed = math.sqrt(self.AccX ** 2 + self.AccY** 2)
-        # calc the magnitude using the speed of x and y 
-
-    def calc_velocity (self):
-        self.calc_mag ()
-        self.velocity = self.speed / self.time
-
+        
     def calc_accelr (self):
-        self.calc_velocity ()
-        self.acceler = self.velocity / self.time
+        if (self.prev != None):
+            self.acceler = self.velocity / (self.time - self.prev)
+        self.prev = self.velocity
 
     def update(self, data):
-        self.calc_velocity ()
+        self.set_velocity(data.get_curr_vel ())
         self.calc_mag ()
         self.calc_accelr ()
         return {"power" : self.power, "status" : self.status, "velocity" : self.velocity, "acceleration" : self.acceler}
