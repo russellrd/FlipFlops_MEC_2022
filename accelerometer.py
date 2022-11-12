@@ -31,11 +31,24 @@ class Accelerometer:
     def set_velocity (self, velocity):
         pass
 
+    def get_x (self):
+        return AccX
     
-
+    def get_y (self):
+        return AccY
+    
     def get_speed(self):
         return speed
-
+    
+    def get_time(self): 
+        return time
+    
+    def get_magn(self): 
+        return magn
+    
+    def get_velocity(self):
+        return velocity 
+    
     def __str__(self):
         return "Name: " + self.name + " Speed: " + self.speed
 
