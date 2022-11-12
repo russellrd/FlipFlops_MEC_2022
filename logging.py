@@ -10,6 +10,6 @@ class loggine():
 		self.fh.close()
 
 	def log(self, level, data):
-		info = levelDict[level] + " " + data + "\n"
-		self.fh.write(logger)
+		info = self.levelDict[level] + " " + data + "\n"
+		self.fh.write(info)
 
