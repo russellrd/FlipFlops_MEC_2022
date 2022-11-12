@@ -1,7 +1,5 @@
 import math
 
-
-
 class Accelerometer: 
     AccX= 0 
     AccY = 0
@@ -15,13 +13,15 @@ class Accelerometer:
         self.logger = logger
 	
     def set_x(self, AccX):
-        #self.logger.log("AS")
+        self.logger.log("A-X", AccX);
         self.AccX
 
     def set_y (self, AccY):
+        self.logger.log("A-Y", AccY);
         self.AccY
 
     def set_speed (self, speed): 
+        self.logger.log("A-S", speed);
         self.speed
 
     def set_time (self, time): 
@@ -31,6 +31,7 @@ class Accelerometer:
         self.magn
 
     def set_velocity (self, velocity):
+        self.logger.log("A-V", velocity);
         self.velocity
 
     def get_x (self):
@@ -59,6 +60,9 @@ class Accelerometer:
     def calc_velocity (self):
         self.calc_mag ()
         self.velocity = self.speed / self.time
+
+    def update(self, data):
+        pass
 
     def __str__(self):
         return "Name: " + self.name + " Speed: " + self.speed
