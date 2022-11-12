@@ -1,7 +1,8 @@
-class loggine():
+class log():
 	file_name = ""
 	fh = None
 	levelDict = {"P": "Power", "E": "Error", "GA": "Angle"}
+
 	def __init__(self, file_name):
 		self.file_name = file_name
 		self.fh = open(self.file_name, "w")
